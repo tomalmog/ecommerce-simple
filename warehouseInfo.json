@@ -1,0 +1,57 @@
+{
+    "warehouse_id": "WH-001",
+    "location": "1234 Industrial Way, City, State, ZIP",
+    "items": [
+      {
+        "item_id": "ITM-1001",
+        "name": "Laptop",
+        "category": "Electronics",
+        "quantity": 150,
+        "unit_price": 999.99,
+        "supplier": "Tech Supplies Co.",
+        "date_received": "2024-08-01",
+        "location": "Aisle 3, Shelf B"
+      },
+      {
+        "item_id": "ITM-1002",
+        "name": "Office Chair",
+        "category": "Furniture",
+        "quantity": 75,
+        "unit_price": 149.99,
+        "supplier": "Office World",
+        "date_received": "2024-08-10",
+        "location": "Aisle 7, Shelf A"
+      },
+      {
+        "item_id": "ITM-1003",
+        "name": "Printer Paper",
+        "category": "Office Supplies",
+        "quantity": 5000,
+        "unit_price": 0.10,
+        "supplier": "Paper Depot",
+        "date_received": "2024-07-25",
+        "location": "Aisle 2, Shelf C"
+      },
+      {
+        "item_id": "ITM-1004",
+        "name": "Wireless Mouse",
+        "category": "Electronics",
+        "quantity": 200,
+        "unit_price": 29.99,
+        "supplier": "Gadget Hub",
+        "date_received": "2024-08-15",
+        "location": "Aisle 4, Shelf D"
+      },
+      {
+        "item_id": "ITM-1005",
+        "name": "Desk Lamp",
+        "category": "Lighting",
+        "quantity": 120,
+        "unit_price": 24.99,
+        "supplier": "Light Fixtures Ltd.",
+        "date_received": "2024-08-05",
+        "location": "Aisle 6, Shelf B"
+      }
+    ]
+  }
+  
