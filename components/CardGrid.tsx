@@ -14,7 +14,7 @@ export const CardGrid = async () => {
     <div className={styles.cardGrid}>
       {items.map((item: any) => (
         <CompleteCard
-          key={item.id}
+          key={item.item_id}
           title={item.name}
           description={item.unit_price}
           content={item.category}

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import {
   Card,
   CardContent,
@@ -8,12 +9,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+import { Button } from "./ui/button";
+
 interface Props {
   title?: string;
   description?: string;
   content?: string;
   footer?: string;
-  key?: string;
 }
 
 const CompleteCard = ({
@@ -21,11 +30,19 @@ const CompleteCard = ({
   description = "Item Information",
   content = "Card Content",
   footer = "Card Footer",
-  key,
 }: Props) => {
+  const addToCart = () => {
+    console.log("add to cart");
+
+    fetch("/api/cart", {
+      method: "POST",
+      body: JSON.stringify({ id: "123" }),
+    });
+  };
+
   return (
     <>
-      <Card id={key}>
+      <Card>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -36,7 +53,17 @@ const CompleteCard = ({
         </CardContent>
 
         <CardFooter>
-          <p>{footer}</p>
+          <div className="flex items-center justify-between w-full">
+            <p className=" ">{footer}</p>
+
+            <Button onClick={addToCart}> test </Button>
+
+            {/* <SignedOut>
+              <p className="">---</p>
+            </SignedOut>
+            <SignedIn>
+            </SignedIn> */}
+          </div>
         </CardFooter>
       </Card>
     </>
