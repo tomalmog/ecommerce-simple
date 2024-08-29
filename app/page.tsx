@@ -1,12 +1,6 @@
 import { CardGrid } from "@/components/CardGrid";
-import CompleteCard from "@/components/CompleteCard";
-import FileReader from "@/components/FileReader";
-import Navbar from "@/components/navigation/navbar";
+import prisma from "@/lib/db";
 
-export default function Home() {
-  return (
-    <>
-      <CardGrid />
-    </>
-  );
+export default async function Home() {
+  return <>Home Page</>;
 }

@@ -1,25 +1,24 @@
 import React from "react";
-import { promises as fs } from "fs";
 import CompleteCard from "./CompleteCard";
 
 import styles from "./CardGrid.module.css";
+import prisma from "@/lib/db";
 
-export const CardGrid = async () => {
-  const file = await fs.readFile(process.cwd() + "/warehouseInfo.json", "utf8");
-  const data = JSON.parse(file);
+interface Props {
+  takeAmount: number;
+  skipAmount: number;
+}
 
-  const items = data["items"];
+export const CardGrid = async ({ takeAmount, skipAmount }: Props) => {
+  const products = await prisma.product.findMany({
+    take: takeAmount,
+    skip: skipAmount,
+  });
 
   return (
     <div className={styles.cardGrid}>
-      {items.map((item: any) => (
-        <CompleteCard
-          key={item.item_id}
-          title={item.name}
-          description={item.unit_price}
-          content={item.category}
-          footer={item.quantity + " in stock"}
-        />
+      {products.map((product) => (
+        <CompleteCard title={product.title} id={product.id} key={product.id} />
       ))}
     </div>
   );

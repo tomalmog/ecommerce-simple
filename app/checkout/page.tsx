@@ -1,44 +1,73 @@
-import { addToCart, createPost } from "@/actions/actions";
-import AddToCartButton from "@/components/AddToCartButton";
-import { Button } from "@/components/ui/button";
+import OrderForm from "@/components/OrderForm";
+import {
+  Table,
+  TableCaption,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
 import prisma from "@/lib/db";
-import Link from "next/link";
-import React from "react";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default async function PostsPage() {
-  const posts = await prisma.post.findMany();
+  const user = await currentUser();
+
+  const getUserByEmail = await prisma.user.findFirst({
+    where: {
+      email: user?.emailAddresses[0].emailAddress,
+    },
+  });
+
+  const cart = await prisma.cart.findMany({
+    where: {
+      userId: getUserByEmail?.id,
+    },
+  });
+
+  const getProductById = async (productId: string) => {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+
+    return product.title;
+  };
 
   return (
     <>
-      <h1>All Posts</h1>
-      <ul className="border-t border-b border-black/10 py-5 leading-8">
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Link
-              className="flex items-center justify-between px-5"
-              href={`/posts/${post.slug}`}
-            >
-              {post.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="flex">
+        <div className="w-[300px] ml-auto mr-10 my-10 border-black border-solid border-2 rounded-xl">
+          <Table className="w-full">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Item</TableHead>
+                <TableHead className="text-center">Quantity</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {user
+                ? cart.map((cartEntry) => (
+                    <TableRow>
+                      <TableCell>
+                        {getProductById(cartEntry.productId)}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {cartEntry.quantity}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : null}
+            </TableBody>
+          </Table>
+        </div>
 
-      <form
-        action={createPost}
-        className="flex flex-col items-center gap-y-5 pt-24 text-center"
-      >
-        <input type="text" name="title" className="bg-slate-400" />
-
-        <textarea name="content" className="bg-slate-400"></textarea>
-
-        <button
-          type="submit"
-          className="bg-blue-500 py-2 text-white rounded-sm"
-        >
-          Create Post
-        </button>
-      </form>
+        <div className="w-[300px] mr-auto ml-10 my-10 border-black border-solid border-2 rounded-xl p-8">
+          <OrderForm userId={getUserByEmail?.id} />
+        </div>
+      </div>
     </>
   );
 }

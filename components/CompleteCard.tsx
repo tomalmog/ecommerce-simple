@@ -17,26 +17,30 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import { currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
   content?: string;
   footer?: string;
+  id: string;
 }
 
 const CompleteCard = ({
-  title = "Item",
+  title,
   description = "Item Information",
   content = "Card Content",
   footer = "Card Footer",
+  id,
 }: Props) => {
   const addToCart = () => {
     console.log("add to cart");
 
     fetch("/api/cart", {
       method: "POST",
-      body: JSON.stringify({ id: "123" }),
+      body: JSON.stringify({ id: id }),
     });
   };
 
@@ -56,7 +60,9 @@ const CompleteCard = ({
           <div className="flex items-center justify-between w-full">
             <p className=" ">{footer}</p>
 
-            <Button onClick={addToCart}> test </Button>
+            <Button size="xs" onClick={addToCart}>
+              Add To Cart
+            </Button>
 
             {/* <SignedOut>
               <p className="">---</p>
