@@ -2,8 +2,6 @@
 
 
 import prisma from "@/lib/db";
-import { CreateOrganization } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
 import { Cart} from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
@@ -48,7 +46,6 @@ export async function POST(request: NextRequest, ) {
             userId: userId,
         }
     })
-    
     
 
     revalidatePath("/checkout");

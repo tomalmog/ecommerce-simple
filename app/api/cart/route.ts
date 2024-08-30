@@ -21,7 +21,7 @@ export async function POST(request: NextRequest, ) {
     const addItemToCart = await prisma.cart.upsert({
         where: {
             userId_productId: {
-                userId: getUserByEmail?.id,
+                userId: getUserByEmail?.id!,
                 productId: id,
             }
         },
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest, ) {
        },
 
        create: {
-        userId:  getUserByEmail?.id,
+        userId:  getUserByEmail?.id!,
         productId: id,
         quantity: 1
        }

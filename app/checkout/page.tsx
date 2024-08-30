@@ -33,7 +33,7 @@ export default async function PostsPage() {
       },
     });
 
-    return product.title;
+    return product?.title;
   };
 
   return (
@@ -65,7 +65,7 @@ export default async function PostsPage() {
         </div>
 
         <div className="w-[300px] mr-auto ml-10 my-10 border-black border-solid border-2 rounded-xl p-8">
-          <OrderForm userId={getUserByEmail?.id} />
+          <OrderForm userId={getUserByEmail?.id!} />
         </div>
       </div>
     </>

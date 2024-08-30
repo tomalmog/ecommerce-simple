@@ -31,7 +31,7 @@ const OrderForm = ({ userId }: Props) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
-    fetch("/api/order", {
+    fetch("/api/order/create_order", {
       method: "POST",
       body: JSON.stringify({ userId: userId, values: values }),
     });
