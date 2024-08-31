@@ -29,7 +29,7 @@ const OrderCard = async ({ order }: Props) => {
 
   return (
     <>
-      <ScrollArea className="w-[400px] h-72 border-black border-solid border-2 rounded-xl">
+      <ScrollArea className="w-[400px] h-72 border-slate-500 border-2 rounded-xl my-2 p-2 shadow-sm">
         <div className="p-4 text-center">
           <p>Name: {order.name}</p>
           <p>Grade: {order.grade}</p>

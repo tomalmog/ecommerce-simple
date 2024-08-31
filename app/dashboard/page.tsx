@@ -1,3 +1,4 @@
+import Sidebar from "@/components/navigation/sidebar";
 import OrderCard from "@/components/OrderCard";
 import prisma from "@/lib/db";
 import React from "react";
@@ -11,9 +12,12 @@ export default async function Home() {
 
   return (
     <>
-      {orders.map((order) => (
-        <OrderCard order={order} />
-      ))}
+      <div className="">
+        {/* <Sidebar></Sidebar> */}
+        {orders.map((order) => (
+          <OrderCard order={order} />
+        ))}
+      </div>
     </>
   );
 }

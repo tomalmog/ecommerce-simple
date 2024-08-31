@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import prisma from "@/lib/db";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   full_name: z.string(),
@@ -28,6 +28,8 @@ interface Props {
 }
 
 const OrderForm = ({ userId }: Props) => {
+  const router = useRouter();
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
@@ -35,6 +37,8 @@ const OrderForm = ({ userId }: Props) => {
       method: "POST",
       body: JSON.stringify({ userId: userId, values: values }),
     });
+
+    router.push("/inventory/0");
   }
 
   const form = useForm<z.infer<typeof formSchema>>({

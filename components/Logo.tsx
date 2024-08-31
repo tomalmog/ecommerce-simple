@@ -7,7 +7,7 @@ interface Props {
 const Logo = ({ title }: Props) => {
   return (
     <>
-      <h1 className="text-xl text-white">{title}</h1>
+      <h1 className="text-2xl font-extrabold text-white">{title}</h1>
     </>
   );
 };
